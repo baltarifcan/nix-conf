@@ -52,8 +52,10 @@
       theme = "Catppuccin-Frappe";
       font.name = "JetBrainsMono Nerd Font";
       font.size = 13;
-      settings.background_opacity = 0.9;
-      settings.shell = "${pkgs.bash}/bin/bash --login -c 'nu --login --interactive'";
+      settings = {
+        background_opacity = 0.9;
+        shell = "${pkgs.bash}/bin/bash --login -c 'nu --login --interactive'";
+      };
     };
   };
 
