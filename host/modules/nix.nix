@@ -2,9 +2,10 @@
   pkgs,
   lib,
   config,
+  params,
   ...
 }: {
-  nix.settings.trusted-users = ["baltarifcan"];
+  nix.settings.trusted-users = [params.userName];
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
     substituters = [

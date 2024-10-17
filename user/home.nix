@@ -1,20 +1,43 @@
 {
   inputs,
+  params,
   pkgs,
   ...
 }: {
   imports = [inputs.ags.homeManagerModules.default];
 
-  programs.ags = {
-    enable = true;
-    extraPackages = with pkgs; [
-      gtksourceview
-      webkitgtk
-      accountsservice
-    ];
+  home.username = params.userName;
+  home.homeDirectory = "/home/${params.userName}";
+
+  programs = {
+    home-manager.enable = true;
+    ags = {
+      enable = true;
+      extraPackages = with pkgs; [
+        gtksourceview
+        webkitgtk
+        accountsservice
+      ];
+    };
+    firefox = {
+      enable = true;
+      profiles.${params.userName} = {};
+    };
+    git = {
+      enable = true;
+      userName = params.userName;
+      userEmail = params.userEmail;
+    };
+    kitty = {
+      enable = true;
+      theme = "Catppuccin-Frappe";
+      font.name = "JetBrainsMono Nerd Font";
+      font.size = 13;
+      settings.background_opacity = 0.9;
+      settings.shell = "${pkgs.bash}/bin/bash --login -c 'nu --login --interactive'";
+    };
   };
-  home.username = "baltarifcan";
-  home.homeDirectory = "/home/baltarifcan";
+
   home.packages = with pkgs; [
     nix-output-monitor
     zip
@@ -27,16 +50,6 @@
     insomnia
     obsidian
   ];
-  programs.git = {
-    userName = "baltarifcan";
-    userEmail = "baltarifcan@gmail.com";
-  };
+
   home.stateVersion = "24.05";
-  programs.home-manager.enable = true;
-  programs = {
-    firefox = {
-      enable = true;
-      profiles.baltarifcan = {};
-    };
-  };
 }

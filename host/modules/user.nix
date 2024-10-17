@@ -2,11 +2,12 @@
   pkgs,
   lib,
   config,
+  params,
   ...
 }: {
-  users.users.baltarifcan = {
+  users.users.${params.userName} = {
     isNormalUser = true;
-    description = "Arifcan";
+    description = params.userDesc;
     extraGroups = ["networkmanager" "wheel"];
   };
 }

@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  params,
   ...
 }: {
   services.printing.enable = true;
@@ -12,7 +13,7 @@
     settings = {
       default_session = {
         command = "Hyprland";
-        user = "baltarifcan";
+        user = params.userName;
       };
     };
   };
