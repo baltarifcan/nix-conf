@@ -16,22 +16,20 @@
     home-manager,
     ...
   }: {
-    nixosConfigurations = {
-      g15-nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./host
-          ./user/nixos.nix
+    nixosConfigurations.g15-nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./host
+        ./user/nixos.nix
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs;};
-            home-manager.users.baltarifcan = import ./user/home.nix;
-          }
-        ];
-      };
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = inputs;
+          home-manager.users.baltarifcan = import ./user/home.nix;
+        }
+      ];
     };
   };
 }

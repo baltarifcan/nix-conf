@@ -4,61 +4,8 @@
   config,
   ...
 }: {
-  users.users.baltarifcan = {
-    isNormalUser = true;
-    description = "Arifcan";
-    extraGroups = ["networkmanager" "wheel"];
-  };
-  nix.settings.trusted-users = ["baltarifcan"];
-  nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
-    substituters = [
-      "https://cache.nixos.org"
-    ];
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    ];
-    builders-use-substitutes = true;
-  };
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 7d";
-  };
-
-  nixpkgs.config.allowUnfree = true;
-
-  time.timeZone = "Europe/Istanbul";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "tr_TR.UTF-8";
-    LC_IDENTIFICATION = "tr_TR.UTF-8";
-    LC_MEASUREMENT = "tr_TR.UTF-8";
-    LC_MONETARY = "tr_TR.UTF-8";
-    LC_NAME = "tr_TR.UTF-8";
-    LC_NUMERIC = "tr_TR.UTF-8";
-    LC_PAPER = "tr_TR.UTF-8";
-    LC_TELEPHONE = "tr_TR.UTF-8";
-    LC_TIME = "tr_TR.UTF-8";
-  };
   services.printing.enable = true;
 
-  fonts = {
-    packages = with pkgs; [
-      material-design-icons
-      noto-fonts
-      noto-fonts-emoji
-      (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
-    ];
-    enableDefaultPackages = false;
-
-    fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
-    };
-  };
   programs.hyprland.enable = true;
   services.greetd = {
     enable = true;
@@ -81,17 +28,9 @@
     neofetch
     vscodium
   ];
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services.power-profiles-daemon.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
 
   hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
