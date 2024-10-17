@@ -61,6 +61,18 @@
     };
   };
   programs.hyprland.enable = true;
+  services.greetd = {
+   enable = true;
+   settings = {
+     default_session = {
+	command="Hyprland";
+	user = "baltarifcan";
+
+};
+
+};
+
+  };
   environment.systemPackages = with pkgs; [
     kitty
     vim
@@ -71,11 +83,11 @@
     lm_sensors
     xfce.thunar
     neofetch
+    vscodium
   ];
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  
   services.power-profiles-daemon.enable = true;
   services.pipewire = {
     enable = true;
@@ -87,7 +99,7 @@
   
   hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
-
+  services.xserver.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;

@@ -1,8 +1,18 @@
 {
-  config,
+  inputs,
   pkgs,
   ...
 }: {
+  imports = [inputs.ags.homeManagerModules.default];
+
+  program.ags = {
+    enable = true;
+    extraPackages = with pkgs; [
+      gtksourceview
+      webkitgtk
+      accountsservice
+    ];
+  };
   home.username = "baltarifcan";
   home.homeDirectory = "/home/baltarifcan";
   home.packages = with pkgs; [
@@ -11,13 +21,11 @@
     unzip
     p7zip
     ripgrep
-htop
-libnotify
-xdg-utils
-insomnia
-obsidian
-
-
+    htop
+    libnotify
+    xdg-utils
+    insomnia
+    obsidian
   ];
   programs.git = {
     userName = "baltarifcan";
@@ -27,10 +35,8 @@ obsidian
   programs.home-manager.enable = true;
   programs = {
     firefox = {
-     enable = true;
-     profiles.baltarifcan = {};
-};
-
-
-   };
+      enable = true;
+      profiles.baltarifcan = {};
+    };
+  };
 }
