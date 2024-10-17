@@ -7,13 +7,15 @@
   ...
 }: {
   imports = [
-    ./modules/user.nix
+    ./modules/vt.nix
     ./modules/system.nix
     ./modules/font.nix
     ./modules/locale.nix
     ./modules/nix.nix
     ./modules/sound.nix
     ./modules/system.nix
+    ./modules/display.nix
+    ./modules/packages.nix
     ./hardware-configuration.nix
   ];
 

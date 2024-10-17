@@ -8,8 +8,27 @@
 
   home.username = params.userName;
   home.homeDirectory = "/home/${params.userName}";
-
+  services.mako.enable = true;
+  services.blueman-applet.enable = true;
+  services.network-manager-applet.enable = true;
+  services.poweralertd.enable = true;
+  services.copyq.enable = true;
+  services.flameshot.enable = true;
+  services.hyprpaper.enable = true;
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.gnome.gnome-themes-extra;
+      name = "Adwaita-dark";
+    };
+  };
   programs = {
+    mpv.enable = true;
+
+    rofi.enable = true;
+    tmux.enable = true;
+    helix.enable = true;
+    nushell.enable = true;
     home-manager.enable = true;
     ags = {
       enable = true;
@@ -39,12 +58,9 @@
   };
 
   home.packages = with pkgs; [
-    nix-output-monitor
-    zip
-    unzip
-    p7zip
-    ripgrep
-    htop
+    hyprpicker
+    fractal
+    webcord
     libnotify
     xdg-utils
     insomnia
