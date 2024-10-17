@@ -5,7 +5,7 @@
 }: {
   imports = [inputs.ags.homeManagerModules.default];
 
-  program.ags = {
+  programs.ags = {
     enable = true;
     extraPackages = with pkgs; [
       gtksourceview

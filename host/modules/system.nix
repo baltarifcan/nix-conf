@@ -2,15 +2,14 @@
   pkgs,
   lib,
   config,
-  username,
   ...
 }: {
-  users.users.${username} = {
+  users.users.baltarifcan = {
     isNormalUser = true;
-    description = username;
+    description = "Arifcan";
     extraGroups = ["networkmanager" "wheel"];
   };
-  nix.settings.trusted-users = [username];
+  nix.settings.trusted-users = ["baltarifcan"];
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
     substituters = [
@@ -62,16 +61,13 @@
   };
   programs.hyprland.enable = true;
   services.greetd = {
-   enable = true;
-   settings = {
-     default_session = {
-	command="Hyprland";
-	user = "baltarifcan";
-
-};
-
-};
-
+    enable = true;
+    settings = {
+      default_session = {
+        command = "Hyprland";
+        user = "baltarifcan";
+      };
+    };
   };
   environment.systemPackages = with pkgs; [
     kitty
@@ -96,7 +92,7 @@
     pulse.enable = true;
     jack.enable = true;
   };
-  
+
   hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
@@ -105,18 +101,17 @@
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     open = false;
-    nvidiaSettings=true;
+    nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.production;
     prime = {
-    sync.enable = true;
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0"; 
-};
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
   services = {
     dbus.packages = [pkgs.gcr];
-    geoclue2.enable = true; 
-
+    geoclue2.enable = true;
 
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
